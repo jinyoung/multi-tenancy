@@ -19,6 +19,7 @@
         <v-card-text>
             <String label="Status" v-model="value.status" :editMode="editMode"/>
             <Number label="OrderId" v-model="value.orderId" :editMode="editMode"/>
+            <String label="FoodName" v-model="value.foodName" :editMode="editMode"/>
         </v-card-text>
 
         <v-card-actions>

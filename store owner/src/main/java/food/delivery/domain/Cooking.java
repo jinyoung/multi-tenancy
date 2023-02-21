@@ -20,6 +20,8 @@ public class Cooking {
 
     private Long orderId;
 
+    private String foodName;
+
     @PostPersist
     public void onPostPersist() {
         Rejected rejected = new Rejected(this);
