@@ -57,7 +57,7 @@
                         </v-fab-transition>
                     </template>
 
-                    <Order :offline="offline" class="video-card" :isNew="true" :editMode="true" v-model="newValue" @add="append" v-if="tick"/>
+                    <OrderForm :offline="offline" class="video-card" :isNew="true" :editMode="true" v-model="newValue" @add="append" v-if="tick"/>
                 
                     <v-btn
                             style="postition:absolute; top:2%; right:2%"
@@ -76,12 +76,14 @@
 
 <script>
     const axios = require('axios').default;
-    import Order from './../Order.vue';
+    import OrderForm from './../Order.vue';
+    import Order from '../models/Order';
+
 
     export default {
         name: 'OrderManager',
         components: {
-            Order,
+            OrderForm,
         },
         props: {
             offline: Boolean,
@@ -90,7 +92,7 @@
         },
         data: () => ({
             values: [],
-            newValue: {},
+            newValue: new Order(),
             tick : true,
             openDialog : false,
         }),
@@ -104,13 +106,15 @@
             temp.data._embedded.orders.map(obj => obj.id=obj._links.self.href.split("/")[obj._links.self.href.split("/").length - 1])
             this.values = temp.data._embedded.orders;
             
-            this.newValue = {
-                'foodId': '',
-                'options': '',
-                'address': '',
-                'customerId': '',
-                'status': '',
-            }
+            // this.newValue = {
+            //     'foodId': '',
+            //     'options': '',
+            //     'address': '',
+            //     'customerId': '',
+            //     'status': '',
+            // }
+
+            this.newValue = new Order();
         },
         methods: {
             closeDialog(){

@@ -83,13 +83,14 @@
 <script>
     const axios = require('axios').default;
 
+    import Order from './models/Order';
 
     export default {
         name: 'Order',
         components:{
         },
         props: {
-            value: [Object, String, Number, Boolean, Array],
+            value: [Order],
             editMode: Boolean,
             isNew: Boolean,
             offline: Boolean,
@@ -103,6 +104,12 @@
         }),
         computed:{
         },
+
+        created(){
+            
+            this.value = new Order();
+        },
+
         methods: {
             selectFile(){
                 if(this.editMode == false) {
@@ -133,6 +140,10 @@
             },
             async save(){
                 try {
+
+                    
+                    console.log(this.value.toString());
+
                     var temp = null;
 
                     if(!this.offline) {
